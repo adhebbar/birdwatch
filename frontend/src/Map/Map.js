@@ -1,9 +1,42 @@
 import { Container, Row, Col } from 'reactstrap';
-import React from 'react';
+import React, { Component } from 'react';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+
+
+const containerStyle = {
+  width: '100%',
+  height: '100%'
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523
+};
+
+class MyComponents extends Component {
+  render() {
+    return (
+      <LoadScript
+        googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q"
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={3}
+        >
+          { /* Child components, such as markers, info windows, etc. */ }
+          <></>
+        </GoogleMap>
+      </LoadScript>
+    )
+  }
+}
+
 
 function Map() {
     return (
-      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", "backgroundColor": "rgba(255,0,0,0.5)"}}>
+      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", "background-color": "rgba(255,0,0,0.1)"}}>
+        <MyComponents/>
       </Container> 
     );  
   }
