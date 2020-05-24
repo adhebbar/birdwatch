@@ -2,11 +2,12 @@ import { Container, Row, Col } from 'reactstrap';
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
+import ArticlePreview from '../Article/ArticlePreview'
 
 function Results() {
     // to-do: find MATCHING location from given location..
     // to-do: store CURRENT location ..
-    const cards = useSelector(state => state[0].birds.items) || [];
+    const cards = useSelector(state => state.locations[0].birds.items) || [];
     const [collapse, setCollapse] = useState(0);
 
     var toggle = function (e) {
@@ -15,19 +16,15 @@ function Results() {
     };
 
     return (
-      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
+      <Container fluid style= {{"padding":"0px","borderRadius": "10px", "overflow-y": "auto", "width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
         {cards.map((bird, index) => {
-          console.log(bird);
+          // console.log(bird);
           return (
             <Card key={index}>
               <CardHeader onClick={toggle} data-event={index}>{bird.comName}</CardHeader>
               <Collapse isOpen={collapse === index}>
-                <CardBody>Bird Article preview here,
-                          which should be a new component that gets
-                          passed in the bird to display any data, make more fetches, etc.. example:
-                          <br/> Scientific name: {bird.sciName}
-                          <br/> This little boy was last seen in: {bird.locName} 
-                          <br/> {bird.locationPrivate ? "This is a private location, but here's some surrounding areas!" : "This is a public location!"}
+                <CardBody>
+                  <ArticlePreview bird={bird}/>
                 </CardBody>
               </Collapse>
             </Card>

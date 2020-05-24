@@ -5,10 +5,11 @@ import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/ap
 
 const containerStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
+  borderRadius: "10px"
 };
 
-const center = {
+var center = {
   lat: -3.745,
   lng: -38.523
 };
@@ -16,7 +17,7 @@ const center = {
 
 function RecenterComponent(){
   const map = useGoogleMap()
-  console.log("yes")
+
   React.useEffect(() => {
     if (map) {
       map.addListener('center_changed', function() {
@@ -59,7 +60,9 @@ function MyComponents(){
 
 function Map() {
     return (
-      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", "background-color": "rgba(255,0,0,0.1)"}}>
+      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", 
+                                "backgroundColor": "rgba(255,0,0,0.1)",
+                                height: '800px'}}>
         <MyComponents/>
       </Container> 
     );  

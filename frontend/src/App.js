@@ -12,7 +12,7 @@ import { Provider, useSelector, useDispatch } from "react-redux";
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
-import { fetchBirds } from './redux/actions'
+import { fetchBirds, fetchBirdDetails } from './redux/actions'
 import rootReducer from './redux/reducers'
 
 const loggerMiddleware = createLogger()
@@ -31,10 +31,14 @@ store.dispatch(fetchBirds({lat: 37.751, lng: -97.822, radius: 1})).then(
   () => console.log(store.getState())
 )
 
+store.dispatch(fetchBirdDetails('Sturnella magna')).then(
+  () => console.log(store.getState())
+);
+
 function Home() {
   return (<Row>
-            <Col xs="8" ><Map/> </Col>
-            <Col xs="4" ><Results/></Col>
+            <Col xs="12" md="8"><Map /> </Col>
+            <Col xs="12" md="4"><Results/></Col>
           </Row>
   );
 }
@@ -43,6 +47,7 @@ function App() {
     return (
       <Provider store={store}>
         <div className="appContainer" >
+          <div className="ml-5 mb-2" style={{"color":"#FFFFFF"}}><h3><i>Birds are very important!</i></h3></div>
           <Container fluid> 
             <Router>
               <Route exact path="/" component={Home} />

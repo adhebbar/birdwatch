@@ -1,9 +1,34 @@
 .App {
   text-align: center;
+  background: #333;
 }
 
 .appContainer { 
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   max-width:1400px;
+}
+
+.object-fit{
+  object-fit: cover;
+  height: 220px;
+  max-width: 220px;
+  border-radius: 10px;
+  border: 2px;
+  float: right
+}
+
+.card{
+  border-radius: 0!important;
+}
+
+a {
+  border: 1px solid;
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }

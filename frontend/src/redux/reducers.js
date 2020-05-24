@@ -18,6 +18,13 @@
 //         items: []
 //       }
 //     }
+//   birdDetails: {
+//      sciName: {
+//   thumbnail: ...
+
+// },
+//      sciName2: {}
+//   }
 //   ]
 //   to do: here is where we save the UI stuff map positions/etc!
 // }
@@ -28,7 +35,9 @@ import {
   REQUEST_BIRDS,
   REQUEST_HOTSPOTS,
   RECEIVE_BIRDS,
-  RECEIVE_HOTSPOTS
+  RECEIVE_HOTSPOTS,
+  REQUEST_BIRD_DETAILS,
+  RECEIVE_BIRD_DETAILS
 } from './actions'
 
 function birds ( 
@@ -51,6 +60,41 @@ function birds (
         didInvalidate: false,
         items: action.birds
       })
+    default:
+      return state;
+  }
+}
+
+function birdDetails (state = {
+  isFetching: false,
+  didInvalidate: false,
+  details: []
+}, action) { 
+  switch (action.type) { 
+    case REQUEST_BIRD_DETAILS:
+      case REQUEST_BIRDS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        didInvalidate: false
+      })
+    case RECEIVE_BIRD_DETAILS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        details: action.birdDetails
+      })
+    default:
+      return state;
+  }
+}
+
+function birdDetailsByScientificName (state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_BIRD_DETAILS:
+    case REQUEST_BIRD_DETAILS:
+      return Object.assign({}, state, {
+        [action.scientificName]: birdDetails(state[action.scientificName], action)
+      });
     default:
       return state;
   }
@@ -93,6 +137,6 @@ function locations (state = [], action) {
 }
 
 // const rootReducer = locations;
-const rootReducer = locations;
+const rootReducer = combineReducers({locations, birdDetailsByScientificName});
 
 export default rootReducer
