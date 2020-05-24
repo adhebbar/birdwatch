@@ -48,7 +48,7 @@ function App() {
     return (
       <Provider store={store}>
         <div className="appContainer" >
-          <div className="ml-5 mb-2" style={{"color":"#FFFFFF"}}><h3><i>Birds are very important!</i></h3></div>
+          <div className="ml-5 mb-2" style={{"color":"#FFFFFF"}}><h3><i>Birds are very important!</i> Find some around you, then spot them in the wild!</h3></div>
           <Container fluid> 
             <Router>
               <Route exact path="/" component={Home} />

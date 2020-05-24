@@ -36,13 +36,10 @@ import {
   REQUEST_HOTSPOTS,
   RECEIVE_BIRDS,
   RECEIVE_HOTSPOTS,
-<<<<<<< HEAD
   REQUEST_BIRD_DETAILS,
-  RECEIVE_BIRD_DETAILS
-=======
+  RECEIVE_BIRD_DETAILS,
   SET_CENTER,
   SET_ZOOM
->>>>>>> nobugs
 } from './actions'
 
 function center ( state = {lat:0,lng:0}, action)

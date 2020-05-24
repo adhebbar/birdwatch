@@ -15,17 +15,11 @@ var center = {
   lng: -38.523
 };
 
-<<<<<<< HEAD
-
-function RecenterComponent(){
-  const map = useGoogleMap()
-=======
 function RecenterComponent(props){
   const map = useGoogleMap()
   const center = useSelector(state => state.center);
   console.log("yes")
   const dispatch = useDispatch()
->>>>>>> nobugs
 
   React.useEffect(() => {
     if (map) {
