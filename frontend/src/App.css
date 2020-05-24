@@ -1,9 +1,12 @@
 .App {
   text-align: center;
+  background: #333;
 }
 
 .appContainer { 
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   max-width:1400px;
 }

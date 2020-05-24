@@ -33,7 +33,7 @@ store.dispatch(fetchBirds({lat: 37.751, lng: -97.822, radius: 1})).then(
 
 function Home() {
   return (<Row>
-            <Col xs="8" ><Map/> </Col>
+            <Col xs="8" ><Map /> </Col>
             <Col xs="4" ><Results/></Col>
           </Row>
   );

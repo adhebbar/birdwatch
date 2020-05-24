@@ -15,9 +15,9 @@ function Results() {
     };
 
     return (
-      <Container fluid style= {{"padding":"0px","width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
+      <Container fluid style= {{"padding":"0px","borderRadius": "10px","width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
         {cards.map((bird, index) => {
-          console.log(bird);
+          // console.log(bird);
           return (
             <Card key={index}>
               <CardHeader onClick={toggle} data-event={index}>{bird.comName}</CardHeader>
