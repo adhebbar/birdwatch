@@ -74,7 +74,7 @@ export function fetchBirds (coordinates) {
     var url = 'https://api.ebird.org/v2/data/obs/geo/recent';
     console.log(Math.min(coordinates.zoom, 50), coordinates.zoom)
 
-    url += `?lat=${coordinates.lat}&lng=${coordinates.lng}&dist=${Math.min(coordinates.zoom, 50)}`;
+    url += `?lat=${coordinates.lat}&lng=${coordinates.lng}&dist=${50}`;
 
     console.log(url);
     const request = new Request(url, {
@@ -103,7 +103,7 @@ export function fetchHotspots (coordinates) {
     // to do, put both endpoints into a CONFIG (hotspots,recent obs)
     // coordinates.zoom
     var url = 'https://api.ebird.org/v2/ref/hotspot/geo';
-    url += `?lat=${coordinates.lat}&lng=${coordinates.lng}&dist=${Math.max(coordinates.zoom, 500)}`;
+    url += `?lat=${coordinates.lat}&lng=${coordinates.lng}&dist=${500}`;
 
     console.log("!!!!!!!!!!!");
     console.log(url);

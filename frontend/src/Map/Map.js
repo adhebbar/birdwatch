@@ -34,15 +34,15 @@ function RecenterComponent(){
           dispatch(fetchBirds({lat: newLat, lng: newLng, zoom:zoom}));
         }
       });
-      map.addListener('zoom_changed', function() {
-        // zoom in kilometers
-        var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
-        // console.log(kms)
-        let newLng = map.getCenter().lng();
-        let newLat = map.getCenter().lat();
-        dispatch(setZoom(kms))
-        dispatch(fetchBirds({lat: newLat, lng: newLng(), zoom:kms}))
-      });
+      // map.addListener('zoom_changed', function() {
+      //   // zoom in kilometers
+      //   var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
+      //   // console.log(kms)
+      //   let newLng = map.getCenter().lng();
+      //   let newLat = map.getCenter().lat();
+      //   dispatch(setZoom(kms))
+      //   dispatch(fetchBirds({lat: newLat, lng: newLng(), zoom:kms}))
+      // });
     }
   },[map])
 
