@@ -15,7 +15,6 @@ var center = {
   lng: -38.523
 };
 
-
 function RecenterComponent(){
   const map = useGoogleMap()
   console.log("yes")
