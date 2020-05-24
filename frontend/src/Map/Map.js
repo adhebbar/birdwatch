@@ -45,7 +45,7 @@ function MyComponents(){
     }
 
     return (
-      <LoadScript>
+      <LoadScript googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q">
         
         <GoogleMap
 
