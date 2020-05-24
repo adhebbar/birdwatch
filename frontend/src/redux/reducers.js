@@ -38,12 +38,14 @@ function center ( state = {lat:0,lng:0}, action)
   switch (action.type){
     case SET_CENTER:
       return {lat: action.coordinates.lat, lng: action.coordinates.lng};
+    case SET_ZOOM: 
     default: 
+      console.log('why default?')
       return state;
   }
 }
 
-function zoom ( state = 500, action)
+function zoom ( state = 5000, action)
 {
   switch (action.type){
     case SET_ZOOM:
@@ -52,7 +54,6 @@ function zoom ( state = 500, action)
       return state;
   }
 }
-
 
 function birds ( 
   state = {
