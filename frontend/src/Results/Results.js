@@ -3,14 +3,13 @@ import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
 import ArticlePreview from '../Article/ArticlePreview'
-import { fetchBirdDetails } from '../redux/actions';
 
 function Results() {
     // to-do: find MATCHING location from given location..
     // to-do: store CURRENT location ..
     const cards = useSelector(state => state.locations[0].birds.items) || [];
     const [collapse, setCollapse] = useState(0);
-    
+
     var toggle = function (e) {
         let event = e.target.dataset.event;
         setCollapse ( collapse === Number(event) ? 0 : Number(event) );

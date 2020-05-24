@@ -124,3 +124,26 @@ export function fetchBirdDetails (scientificName) {
       )
   }
 }
+
+function shouldFetchBirdDetails(state, scientificName) {
+  const birdDetails = state.birdDetailsByScientificName[scientificName]
+  if (!birdDetails) {
+    return true
+  } else if (birdDetails.isFetching) {
+    return false
+  } else {
+    return birdDetails.didInvalidate
+  }
+}
+
+export function fetchBirdDetailsIfNeeded(scientificName) {
+  return (dispatch, getState) => {
+    if (shouldFetchBirdDetails(getState(), scientificName)) {
+      // Dispatch a thunk from thunk!
+      return dispatch(fetchBirdDetails(scientificName))
+    } else {
+      // Let the calling code know there's nothing to wait for.
+      return Promise.resolve()
+    }
+  }
+}
