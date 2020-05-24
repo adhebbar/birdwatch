@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 
 function ArticlePreview(props) { 
     // bird acquired from props
@@ -16,7 +16,12 @@ function ArticlePreview(props) {
             <Col xs={6}>
                 <img src=""></img>
             </Col>
-            <Col><br/> {bird.locationPrivate ? "This is a private location, but we'll show you some surrounding areas" : "This is a public location"}</Col>
+            <Col xs={6} style={{'marginTop':'6px'}}>
+                {bird.locationPrivate ? "This is a private location, but we'll show you some surrounding areas" : "This is a public location"}
+            </Col>
+            <Col xs={6} className="text-right d-flex justify-content-end align-items-end">
+                <Button color="primary">Learn more</Button>
+            </Col>
         </Row>
     ) 
 }
