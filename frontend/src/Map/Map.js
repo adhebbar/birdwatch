@@ -1,7 +1,8 @@
 import { Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-
+import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
+import { useDispatch } from 'react-redux';
+import { setCenter } from '../redux/actions'
 
 const containerStyle = {
   width: '100%',
@@ -14,24 +15,51 @@ var center = {
   lng: -38.523
 };
 
-class MyComponents extends Component {
-  render() {
-    console.log(center);
+
+function RecenterComponent(){
+  const map = useGoogleMap()
+  console.log("yes")
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    if (map) {
+      map.addListener('center_changed', function() {
+        console.log(map.getCenter()) // zoom_changed
+        console.log(map.getCenter().lat())
+        console.log(map.getCenter().lng())
+        dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
+      });
+    }
+  },[map])
+
+  return null
+}
+
+function MyComponents(){
+  
+  function boundsCallBack()  {
+    }
+
     return (
       <LoadScript
-          googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q">
-          <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={3}
-          >
+        googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q"
+      >
+        
+        <GoogleMap
+
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={3}
+          onBoundsChanged = {() => console.log("bounds changed")}
+          onCenterChanged = {() => RecenterComponent}
+        >
+          <RecenterComponent/>
           { /* Child components, such as markers, info windows, etc. */ }
-          <></>
-          </GoogleMap>
+          <></> */}
+        </GoogleMap>
       </LoadScript>
     )
   }
-}
 
 
 function Map() {
