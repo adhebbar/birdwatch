@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'reactstrap';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { setCenter, fetchBirds } from '../redux/actions'
 
 const containerStyle = {
@@ -15,8 +15,9 @@ var center = {
   lng: -38.523
 };
 
-function RecenterComponent(){
+function RecenterComponent(props){
   const map = useGoogleMap()
+  const center = useSelector(state => state.center);
   console.log("yes")
   const dispatch = useDispatch()
 
@@ -28,6 +29,9 @@ function RecenterComponent(){
         console.log(map.getCenter().lng())
         dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
         dispatch(fetchBirds({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
+        if (Math.abs(center.lat - map.getCenter().lat()) > 1.0 || Math.abs(center.lng - map.getCenter().lng()) > 1.0) {
+          props.setLocalCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()});
+        }
       });
     }
   },[map])
@@ -36,14 +40,12 @@ function RecenterComponent(){
 }
 
 function MyComponents(){
-  
+  const [localCenter, setLocalCenter] = useState({lat:0, lng:0});
   function boundsCallBack()  {
     }
 
     return (
-      <LoadScript
-        googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q"
-      >
+      <LoadScript>
         
         <GoogleMap
 
@@ -51,9 +53,9 @@ function MyComponents(){
           center={center}
           zoom={3}
           onBoundsChanged = {() => console.log("bounds changed")}
-          onCenterChanged = {() => RecenterComponent}
+          onCenterChanged = {() => console.log('OK')}
         >
-          <RecenterComponent/>
+          <RecenterComponent setLocalCenter={setLocalCenter} />
           { /* Child components, such as markers, info windows, etc. */ }
           <></> */}
         </GoogleMap>
