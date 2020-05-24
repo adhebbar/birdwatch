@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
 import { useDispatch } from 'react-redux';
-import { setCenter } from '../redux/actions'
+import { setCenter, fetchBirds } from '../redux/actions'
 
 const containerStyle = {
   width: '100%',
@@ -28,6 +28,7 @@ function RecenterComponent(){
         console.log(map.getCenter().lat())
         console.log(map.getCenter().lng())
         dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
+        dispatch(fetchBirds({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
       });
     }
   },[map])
