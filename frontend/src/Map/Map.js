@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'reactstrap';
 import React, { Component, useState } from 'react';
-import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
+import { GoogleMap, Circle, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
 import { useDispatch, useSelector} from 'react-redux';
 import { setCenter, fetchBirds } from '../redux/actions'
 
@@ -58,6 +58,12 @@ function MyComponents(){
           <RecenterComponent setLocalCenter={setLocalCenter} />
           { /* Child components, such as markers, info windows, etc. */ }
           <></> */}
+          <Circle 
+              // required
+              center={{lat:parseFloat(localCenter.lat), lng:parseFloat(localCenter.lng)}}
+              // required
+              options={options}
+            />
         </GoogleMap>
       </LoadScript>
     )
