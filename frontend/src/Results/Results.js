@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 function Results() {
     // to-do: find MATCHING location from given location..
     // to-do: store CURRENT location ..
-    const cards = useSelector(state => state.locations ? state.locations[0].bird.items : []) || [];
+    const cards = useSelector(state => state.locations ? state.locations[0].birds.items : []) || [];
     const [collapse, setCollapse] = useState(0);
 
     var toggle = function (e) {

@@ -116,6 +116,10 @@ function locations (state = [], action) {
 }
 
 // const rootReducer = locations;
-const rootReducer = combineReducers(locations, zoom, center);
+const rootReducer = combineReducers({
+  locations: locations, 
+  zoom: zoom, 
+  center: center
+});
 
 export default rootReducer
