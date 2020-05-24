@@ -15,7 +15,7 @@ function Results() {
     };
 
     return (
-      <Container fluid style= {{"padding":"0px","borderRadius": "10px","width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
+      <Container fluid style= {{"padding":"0px","borderRadius": "10px", "overflow-y": "auto", "width": "100%","height": "800px", "backgroundColor": "rgba(0,255,0,0.5)"}}>
         {cards.map((bird, index) => {
           // console.log(bird);
           return (

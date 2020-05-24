@@ -10,3 +10,7 @@
   margin-bottom: 3rem;
   max-width:1400px;
 }
+
+.card{
+  border-radius: 0!important;
+}
