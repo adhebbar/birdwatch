@@ -2,6 +2,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { Collapse, CardBody, Card, CardHeader } from 'reactstrap';
 import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
+import ArticlePreview from '../Article/ArticlePreview'
 
 function Results() {
     // to-do: find MATCHING location from given location..
@@ -22,12 +23,8 @@ function Results() {
             <Card key={index}>
               <CardHeader onClick={toggle} data-event={index}>{bird.comName}</CardHeader>
               <Collapse isOpen={collapse === index}>
-                <CardBody>Bird Article preview here,
-                          which should be a new component that gets
-                          passed in the bird to display any data, make more fetches, etc.. example:
-                          <br/> Scientific name: {bird.sciName}
-                          <br/> This little boy was last seen in: {bird.locName} 
-                          <br/> {bird.locationPrivate ? "This is a private location, but here's some surrounding areas!" : "This is a public location!"}
+                <CardBody>
+                  <ArticlePreview bird={bird}/>
                 </CardBody>
               </Collapse>
             </Card>
