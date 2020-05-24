@@ -2,7 +2,9 @@ import { Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
 import { useDispatch } from 'react-redux';
-import { setCenter } from '../redux/actions'
+import { setCenter , setZoom} from '../redux/actions'
+import {useSelector} from 'react-redux';
+
 
 const containerStyle = {
   width: '100%',
@@ -24,10 +26,16 @@ function RecenterComponent(){
   React.useEffect(() => {
     if (map) {
       map.addListener('center_changed', function() {
-        console.log(map.getCenter()) // zoom_changed
+        console.log(map.getCenter()) 
         console.log(map.getCenter().lat())
         console.log(map.getCenter().lng())
         dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
+      });
+      map.addListener('zoom_changed', function() {
+        // zoom in kilometers
+        var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
+        console.log(kms) 
+        dispatch(setZoom({kms}))
       });
     }
   },[map])
@@ -36,10 +44,12 @@ function RecenterComponent(){
 }
 
 function MyComponents(){
-  
-  function boundsCallBack()  {
-    }
-
+  const cards = useSelector(state => state.locations ? state.locations[0].birds.items : [])
+  console.log("yes")
+  if (cards) {
+    console.log(cards[0])
+  }
+  console.log(cards)
     return (
       <LoadScript
         googleMapsApiKey="AIzaSyDwRk43Y4b1iJkQ1x-TIRCozqnMUyydC9Q"
