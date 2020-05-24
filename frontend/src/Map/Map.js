@@ -39,6 +39,20 @@ function RecenterComponent(props){
   return null
 }
 
+const options = {
+  strokeColor: '#FF0000',
+  strokeOpacity: 0.8,
+  strokeWeight: 2,
+  fillColor: '#FF0000',
+  fillOpacity: 0.35,
+  clickable: false,
+  draggable: false,
+  editable: false,
+  visible: true,
+  radius: 30000,
+  zIndex: 1
+}
+
 function MyComponents(){
   const [localCenter, setLocalCenter] = useState({lat:0, lng:0});
   function boundsCallBack()  {
@@ -58,6 +72,9 @@ function MyComponents(){
           <RecenterComponent setLocalCenter={setLocalCenter} />
           { /* Child components, such as markers, info windows, etc. */ }
           <></> */}
+          <Marker
+            position={{lat:localCenter.lat,lng:localCenter.lng}}
+          />
           <Circle 
               // required
               center={{lat:parseFloat(localCenter.lat), lng:parseFloat(localCenter.lng)}}
