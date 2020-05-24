@@ -36,9 +36,35 @@ import {
   REQUEST_HOTSPOTS,
   RECEIVE_BIRDS,
   RECEIVE_HOTSPOTS,
+<<<<<<< HEAD
   REQUEST_BIRD_DETAILS,
   RECEIVE_BIRD_DETAILS
+=======
+  SET_CENTER,
+  SET_ZOOM
+>>>>>>> nobugs
 } from './actions'
+
+function center ( state = {lat:0,lng:0}, action)
+{
+  switch (action.type){
+    case SET_CENTER:
+      return {lat: action.coordinates.lat, lng: action.coordinates.lng};
+    default: 
+      return state;
+  }
+}
+
+function zoom ( state = 3, action)
+{
+  switch (action.type){
+    case SET_ZOOM:
+      return action.zoom;
+    default: 
+      return state;
+  }
+}
+
 
 function birds ( 
   state = {
@@ -136,7 +162,11 @@ function locations (state = [], action) {
   }
 }
 
-// const rootReducer = locations;
-const rootReducer = combineReducers({locations, birdDetailsByScientificName});
+const rootReducer = combineReducers({
+  locations: locations, 
+  zoom: zoom, 
+  center: center,
+  birdDetailsByScientificName: birdDetailsByScientificName
+});
 
 export default rootReducer
