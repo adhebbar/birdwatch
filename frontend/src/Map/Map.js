@@ -1,7 +1,8 @@
 import { Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
-
+import { useDispatch } from 'react-redux';
+import { setCenter } from '../redux/actions'
 
 const containerStyle = {
   width: '100%',
@@ -17,12 +18,15 @@ const center = {
 function RecenterComponent(){
   const map = useGoogleMap()
   console.log("yes")
+  const dispatch = useDispatch()
+
   React.useEffect(() => {
     if (map) {
       map.addListener('center_changed', function() {
         console.log(map.getCenter()) // zoom_changed
         console.log(map.getCenter().lat())
         console.log(map.getCenter().lng())
+        dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
       });
     }
   },[map])

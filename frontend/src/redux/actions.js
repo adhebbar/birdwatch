@@ -3,6 +3,9 @@ export const REQUEST_BIRDS = 'REQUEST_BIRDS'
 export const RECEIVE_BIRDS = 'RECEIVE_BIRDS'
 export const REQUEST_HOTSPOTS = 'REQUEST_HOTSPOTS'
 export const RECEIVE_HOTSPOTS = 'RECEIVE_HOTSPOTS'
+export const SET_CENTER = 'SET_CENTER'
+export const SET_ZOOM = 'SET_ZOOM'
+
 
 export function invalidateBirds(coordinates) {
   return {
@@ -40,6 +43,20 @@ function receiveHotspots(coordinates, json) {
     coordinates,
     items: json,
     receivedAt: Date.now()
+  }
+}
+
+export function setCenter(coordinates) {
+  return {
+    type: SET_CENTER,
+    coordinates
+  }
+}
+
+export function setZoom(zoom) {
+  return {
+    type: SET_ZOOM,
+    zoom
   }
 }
 
