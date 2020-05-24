@@ -20,7 +20,7 @@ function RecenterComponent(){
   console.log("yes")
   const dispatch = useDispatch() 
   const zoom = useSelector(state => state.zoom)
-  const center = useSelector(state => state.center)
+  // const center = useSelector(state => state.center)
 
   React.useEffect(() => {
     if (map) {
@@ -34,12 +34,9 @@ function RecenterComponent(){
       map.addListener('zoom_changed', function() {
         // zoom in kilometers
         var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
-        console.log(kms) 
+        // console.log(kms) 
         dispatch(setZoom(kms))
-        if (center){
-          console.log("noUUU")
-          dispatch(fetchBirds({lat: center.lat, lng: center.lng, zoom:kms}))
-        }
+        dispatch(fetchBirds({lat: map.getCenter().lat(), lng: map.getCenter().lng(), zoom:kms}))
       });
     }
   },[map])

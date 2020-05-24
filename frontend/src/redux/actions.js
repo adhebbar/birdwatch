@@ -76,7 +76,6 @@ export function fetchBirds (coordinates) {
 
     url += `?lat=${coordinates.lat}&lng=${coordinates.lng}&dist=${Math.min(coordinates.zoom, 50)}`;
 
-    console.log("!!!!!!!!!!!");
     console.log(url);
     const request = new Request(url, {
       method: 'GET',
@@ -86,14 +85,8 @@ export function fetchBirds (coordinates) {
     return fetch(request)
       .then(
         response => response.json()
-        // Do not use catch, because errors occured during rendering
-        // should be handled by React Error Boundaries
-        // https://reactjs.org/docs/error-boundaries.html
       )
       .then(json =>
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
-        // console.log(json),
         dispatch(receiveBirds(coordinates, json)),
       )
   }
