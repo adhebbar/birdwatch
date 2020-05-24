@@ -4,9 +4,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import { fetchBirdDetailsIfNeeded } from '../redux/actions';
 
 function ArticlePreview(props) { 
-    // bird acquired from props
-    // pic, whatever else acquired from another api (????)
-    // want to make link to send user to full article
     let bird = props.bird;
     let dispatch = useDispatch();
     dispatch(fetchBirdDetailsIfNeeded(bird.sciName));
@@ -25,7 +22,7 @@ function ArticlePreview(props) {
                 {birdDetails.extract}
             </Col>
             <Col xs={12} className="mt-3 text-right d-flex justify-content-end align-items-end">
-                <Button color="primary">Learn more</Button>
+                <a href={birdDetails.content_urls ? birdDetails.content_urls.desktop.page : "#"}>Learn more</a>
             </Col>
         </Row>
     ) 
