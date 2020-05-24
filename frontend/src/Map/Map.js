@@ -37,9 +37,11 @@ function RecenterComponent(){
       map.addListener('zoom_changed', function() {
         // zoom in kilometers
         var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
-        // console.log(kms) 
+        // console.log(kms)
+        let newLng = map.getCenter().lng();
+        let newLat = map.getCenter().lat();
         dispatch(setZoom(kms))
-        dispatch(fetchBirds({lat: map.getCenter().lat(), lng: map.getCenter().lng(), zoom:kms}))
+        dispatch(fetchBirds({lat: newLat, lng: newLng(), zoom:kms}))
       });
     }
   },[map])
