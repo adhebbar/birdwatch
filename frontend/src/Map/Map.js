@@ -1,10 +1,8 @@
 import { Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript,useGoogleMap,Marker } from '@react-google-maps/api';
-import { useDispatch } from 'react-redux';
-import { setCenter , setZoom} from '../redux/actions'
-import {useSelector} from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setCenter , setZoom, fetchBirds} from '../redux/actions'
 
 const containerStyle = {
   width: '100%',
@@ -17,11 +15,12 @@ var center = {
   lng: -38.523
 };
 
-
 function RecenterComponent(){
   const map = useGoogleMap()
   console.log("yes")
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() 
+  const zoom = useSelector(state => state.zoom)
+  const center = useSelector(state => state.center)
 
   React.useEffect(() => {
     if (map) {
@@ -29,13 +28,18 @@ function RecenterComponent(){
         console.log(map.getCenter()) 
         console.log(map.getCenter().lat())
         console.log(map.getCenter().lng())
-        dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}))
+        dispatch(setCenter({lat: map.getCenter().lat(), lng: map.getCenter().lng()}));
+        dispatch(fetchBirds({lat: map.getCenter().lat(), lng: map.getCenter().lng(), zoom:zoom}))
       });
       map.addListener('zoom_changed', function() {
         // zoom in kilometers
         var kms = 100*(map.getBounds().getNorthEast().lat() - map.getBounds().getSouthWest().lat())
         console.log(kms) 
-        dispatch(setZoom({kms}))
+        dispatch(setZoom(kms))
+        if (center){
+          console.log("noUUU")
+          dispatch(fetchBirds({lat: center.lat, lng: center.lng, zoom:kms}))
+        }
       });
     }
   },[map])
@@ -60,8 +64,6 @@ function MyComponents(){
           mapContainerStyle={containerStyle}
           center={center}
           zoom={3}
-          onBoundsChanged = {() => console.log("bounds changed")}
-          onCenterChanged = {() => RecenterComponent}
         >
           <RecenterComponent/>
           { /* Child components, such as markers, info windows, etc. */ }

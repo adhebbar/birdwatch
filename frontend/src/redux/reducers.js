@@ -43,7 +43,7 @@ function center ( state = {lat:0,lng:0}, action)
   }
 }
 
-function zoom ( state = 3, action)
+function zoom ( state = 500, action)
 {
   switch (action.type){
     case SET_ZOOM:
